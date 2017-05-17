@@ -1,0 +1,13 @@
+*.swp
+*.swo
+node_modules/
+typings/
+dist/
+demo.wechaty.json
+!logs/README.md
+logs/*.log
+.yarn-cache/
+.pki/
+yarn.lock
+.yarn/
+npm-debug.log
