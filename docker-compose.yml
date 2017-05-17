@@ -1,0 +1,29 @@
+version: '2'
+services:
+  mongodb:
+    image: "tutum/mongodb:3.2"
+    # ports:
+    #  - "27017:27017"
+    #  - "27018:27018"
+    environment:
+     - AUTH=no
+  logic:
+    image: "samurais/ss-spa:latest"
+    command: "node app.js"
+    ports:
+    # access logic web testclient from 3001
+     - "3001:3001"
+    depends_on:
+     - mongodb
+    links:
+     - mongodb
+    environment:
+     - MONGO_DB_URI=mongodb://mongodb/SuperScriptSPA
+  client:
+    image: "samurais/ss-wechaty:latest"
+    depends_on:
+     - logic
+    links:
+     - logic
+    environment:
+     - LOGIC_SERVER_URL=http://logic:3001
